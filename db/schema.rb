@@ -10,9 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_02_145326) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_02_153308) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "artists", force: :cascade do |t|
+    t.string "artist_display_name"
+    t.string "artist_nationality"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "artworks", force: :cascade do |t|
+    t.string "title"
+    t.string "image_url"
+    t.float "price_by_day"
+    t.string "classification"
+    t.string "object_date"
+    t.string "dimensions"
+    t.bigint "artist_id", null: false
+    t.bigint "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_artworks_on_artist_id"
+    t.index ["owner_id"], name: "index_artworks_on_owner_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,4 +51,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_02_145326) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "artworks", "artists"
+  add_foreign_key "artworks", "users", column: "owner_id"
 end
