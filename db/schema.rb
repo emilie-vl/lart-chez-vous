@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_02_153308) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_02_154936) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,6 +36,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_02_153308) do
     t.index ["owner_id"], name: "index_artworks_on_owner_id"
   end
 
+  create_table "bookings", force: :cascade do |t|
+    t.date "begin_date"
+    t.date "end_date"
+    t.integer "price"
+    t.bigint "renter_id", null: false
+    t.bigint "artwork_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artwork_id"], name: "index_bookings_on_artwork_id"
+    t.index ["renter_id"], name: "index_bookings_on_renter_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -53,4 +65,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_02_153308) do
 
   add_foreign_key "artworks", "artists"
   add_foreign_key "artworks", "users", column: "owner_id"
+  add_foreign_key "bookings", "artworks"
+  add_foreign_key "bookings", "users", column: "renter_id"
 end
