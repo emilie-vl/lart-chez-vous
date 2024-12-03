@@ -1,0 +1,9 @@
+<%= simple_form_for @artwork do |f| %>
+  <%= f.input :title, label: "Artwork title" %>
+  <%= f.input :object_date, label: "Date of creation" %>
+  <%= f.input :dimensions %>
+  <%= f.input :price_by_day %>
+  <%= f.association :artist, label_method: :artist_display_name %>
+  <%= f.input :photo, as: :file %>
+  <%= f.submit %>
+<% end %>
