@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :artworks, only: [:index, :show, :new, :destroy] do
     collection do
-      get '/my_artworks', to: "artworks#owner_index", as: :owner
+      get '/my-artworks', to: "artworks#owner_index", as: :owner
     end
     resources :bookings, only: [:new, :create]
   end
