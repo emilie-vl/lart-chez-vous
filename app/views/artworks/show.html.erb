@@ -1,50 +1,42 @@
-<nav style="display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid #ccc;">
-  <a href="<%= root_path %>" style="text-decoration: none; font-size: 1.5rem; font-weight: bold;">L'art chez vous</a>
-  <ul style="list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0;">
-    <li><a href="<%= artworks_path %>" style="text-decoration: none">Explorer</a></li>
-    <li><a href="<%= new_user_session_path %>" style="text-decoration: none">Se connecter</a></li>
-    <li><a href="<%= my_bookings_path %>" style="text-decoration: none">Mes réservations</a></li>
-  </ul>
-</nav>
+<div class="container-fluid px-5">
+  <section class="row">
 
-<div class="container mt-4">
-  <section style="display: flex; gap: 2rem;">
-
-    <div class="image-container" style="flex-shrink: 0; width: 30%;">
-      <img
-        src="<%= @artwork.image_url %>"
-        alt="<%= @artwork.title %>"
-        style="width: 100%; border-radius: 8px;">
+    <div class="col-md-4">
+      <div class="image-container">
+        <img
+          src="<%= @artwork.image_url.presence || cl_image_path(@artwork.image.key) %>"
+          alt="<%= @artwork.title %>"
+          class="img-fluid rounded">
+      </div>
     </div>
 
-    <div style="flex-grow: 1; width: 40%;">
+    <div class="col-md-4">
       <h1><%= @artwork.title %></h1>
       <div class="mt-2">
-        <i class="fas fa-paint-brush mr-3"></i>
+        <i class="fas fa-paint-brush mr-2"></i>
         <span><%= @artwork.artist.artist_display_name %></span>
       </div>
-      <div class="d-flex align-items-center">
-        <i class="fas fa-map-marker-alt mr-3"></i>
-        <span class="mr-2"><%= @artwork.artist.artist_nationality %></span>
-        <span class="mr-2"> • <%= @artwork.object_date %></span>
+      <div class="d-flex align-items-center mt-2">
+        <i class="fas fa-calendar-alt mr-2"></i>
+        <span class="mr-2"><%= @artwork.object_date || "Date inconnue" %></span>
       </div>
       <div class="mt-4">
-        <p><strong>Genre :</strong> <%= @artwork.classification %></p>
-        <p><strong>Dimensions :</strong> <%= @artwork.dimensions %></p>
-        <p><strong>Prix par jour :</strong> <%= @artwork.price_by_day %></p>
+        <p><strong>Dimensions :</strong> <%= @artwork.dimensions || "Non spécifiées" %></p>
+        <p><strong>Prix par jour :</strong> <%= @artwork.price_by_day %> €</p>
         <p><strong>Propriétaire :</strong> <%= @artwork.owner.first_name %> <%= @artwork.owner.last_name %></p>
+        <%# <p><strong>Commentaire :</strong><%= @artwork.comments.last.content || "Aucun commentaire disponible" %></p>
       </div>
     </div>
 
-    <div style="width: 30%;">
+    <div class="col">
       <h2>Réservez cette œuvre</h2>
       <%= simple_form_for [@artwork, @booking] do |f| %>
         <div class="row">
-          <div class="col-md-6">
-            <%= f.input :begin_date, as: :string, label: "Date de début", input_html: { type: 'date' } %>
+          <div class="col-12">
+            <%= f.input :begin_date, as: :string, label: "Date de début", input_html: { type: 'date', id: 'begin_date' } %>
           </div>
-          <div class="col-md-6">
-            <%= f.input :end_date, as: :string, label: "Date de fin", input_html: { type: 'date' } %>
+          <div class="col-12">
+            <%= f.input :end_date, as: :string, label: "Date de fin", input_html: { type: 'date', id: 'end_date' } %>
           </div>
         </div>
         <div class="text-center mt-4">
@@ -53,9 +45,24 @@
       <% end %>
     </div>
   </section>
-</div>
 
-<footer>
-  <hr>
-  <p class="text-center">© 2024 L'art chez vous - Tous droits réservés</p>
-</footer>
+  <h3 class="text-center mt-5 mb-3">Œuvres similaires</h3>
+  <div class="row">
+    <% if @artwork.similar_artworks.any? %>
+      <% @artwork.similar_artworks.each do |similar_artwork| %>
+        <div class="col-md-3 text-center">
+          <a href="<%= artwork_path(similar_artwork) %>">
+            <img src="<%= similar_artwork.image_url.presence || cl_image_path(similar_artwork.image.key) %>"
+                 alt="<%= similar_artwork.title %>"
+                 class="img-fluid rounded mb-2">
+            <p><%= similar_artwork.title %></p>
+          </a>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col-12">
+        <p class="text-center">Aucune œuvre similaire trouvée.</p>
+      </div>
+    <% end %>
+  </div>
+</div>
