@@ -1,22 +1,77 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+require 'open-uri'
+require 'json'
 
-artist = Artist.create(artist_display_name: "Vincent Van Gogh", artist_nationality: "Dutch")
-owner = User.create(email: "vincent.dupuis@gmail.com", password: "password", first_name: "Vincent", last_name: "Dupuis", address: "1000 Bruxelles")
-Artwork.create(
-title: "La nuit étoilée",
-   image_url: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSrIPX_fC6ZPp9N1gFbNsQ-7co-olHwtiDYSoUAtvwK9TYHvpfO-078uebLb0vEJMYOKEgJG-Ee8-y804Ab53dYyPiRRaTcHJLzT6IKMA",
-   price_by_day: 300.0,
-   classification: "Peinture",
-   object_date: "1889",
-   dimensions: "73.7 cm × 92.1 cm",
-   artist: artist,
-   owner: owner
-)
+BASE_USERS = [
+  { first_name: "Guillaume", last_name: "Fournier", email: "gf@lartchezvous.com", address: "Misérieux", password: "kingkong"},
+  { first_name: "Hélène", last_name: "Demanet", email: "hd@lartchezvous.com", address: "Bruxelles", password: "kingkong"},
+  { first_name: "Emilie", last_name: "Vennat-Louveau", email: "evl@lartchezvous.com", address: "Bessines-sur-Gartempes", password: "kingkong"},
+  { first_name: "Cédric", last_name: "Lang-Roth", email: "clr@lartchezvous.com", address: "Betteville", password: "kingkong"},
+]
+
+puts "---Destroying all data"
+Booking.destroy_all
+Artwork.destroy_all
+Artist.destroy_all
+User.destroy_all
+puts "---All data destroyed"
+
+puts "---Creating base users"
+BASE_USERS.each { |user| User.create(user) }
+puts "---Base users created"
+
+puts "---Fetching artists"
+artists_url = "http://www.wikiart.org/en/Popular-Artists/alltime/1?json=2&PageSize=1"
+artists = JSON.parse(URI.parse(artists_url).read)
+
+puts "---Fetching artworks"
+artists.first(10).each do |artist|
+  artist_object = Artist.create(
+    artist_display_name: artist['artistName']
+  )
+  artworks = JSON.parse(URI.parse("http://www.wikiart.org/en/App/Painting/PaintingsByArtist?artistUrl=#{artist['url']}&json=2").read)
+  artworks.each do |artwork|
+  Artwork.create(
+    { artist: artist_object,
+    title: artwork['title'],
+    image_url: artwork['image'],
+    price_by_day: rand(50..27000),
+    object_date: artwork['completitionYear'],
+    dimensions: "#{artwork['width']} x #{artwork['height']}",
+    owner: User.all.sample
+    }
+  )
+  end
+end
+puts "---Artists and artworks created"
+puts "---Creating Magritte"
+magritte = Artist.create(artist_display_name: "René Magritte")
+artworks = JSON.parse(URI.parse("http://www.wikiart.org/en/App/Painting/PaintingsByArtist?artistUrl=rene-magritte&json=2").read)
+artworks.each do |artwork|
+  Artwork.create(
+    { artist: magritte,
+    title: artwork['title'],
+    image_url: artwork['image'],
+    price_by_day: rand(50..27000),
+    object_date: artwork['completitionYear'],
+    dimensions: "#{artwork['width']} x #{artwork['height']}",
+    owner: User.all.sample
+    }
+  )
+end
+puts "---Magritte created"
+
+puts "---Creating bookings"
+User.all.each do |user|
+  10.times do
+    artwork = Artwork.all.sample
+    booking = Booking.new({
+      begin_date: Date.today - rand(365),
+      renter: user,
+      artwork: artwork
+    })
+    booking.end_date = booking.begin_date + rand(10)
+    booking.price = artwork.price_by_day * (booking.end_date - booking.begin_date)
+    booking.save(validate: false)
+  end
+end
+puts "---Bookings created"
