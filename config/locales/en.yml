@@ -29,3 +29,11 @@
 
 en:
   hello: "Hello world"
+
+  activerecord:
+    models:
+      user: Client
+    attributes:
+      user:
+        email: "Email"
+        password: "Mot de passe"
