@@ -10,3 +10,38 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+.quote {
+  font-family: 'Lato', sans-serif;
+  font-style: italic;
+}
+
+#search input {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  font-family: 'Lato', sans-serif;
+  color: #495057;
+  padding: 8px;
+}
+
+#search input::placeholder {
+  font-family: 'Lato', sans-serif;
+  font-style: italic;
+  color: #6c757d;
+}
+
+.navbar {
+  border-bottom: 1px solid black;
+  padding: 1rem;
+  margin-bottom: 5rem;
+}
+
+#connect .btn-outline-secondary {
+  background-color: black;
+  color: white;
+}
+
+#connect .btn-outline-secondary:hover {
+  background-color: #BBBBBB;
+  color: white;
+}

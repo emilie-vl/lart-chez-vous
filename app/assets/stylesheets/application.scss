@@ -7,6 +7,63 @@
 @import "bootstrap";
 @import "font-awesome";
 
+
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "components/footer";
+
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.body-content {
+  min-height: 100%; /* Assure que le contenu occupe toute la hauteur */
+  padding-bottom: 100px; /* Ajoute un espace pour le footer */
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 30px;
+}
+
+.cards .card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  height: 310px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.card-artwork-infos {
+  padding: 5px;
+}
+
+.card-artwork-infos h2 {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  margin: 10px 0;
+  font-weight: 700;
+}
+
+.card-artwork-infos h3 {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  margin: 5px 0;
+  font-weight: 400;
+}
+
+.card-artwork-infos p {
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+  color: #555;
+  margin: 5px 0;
+}
