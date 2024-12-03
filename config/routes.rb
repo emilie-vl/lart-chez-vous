@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  resources :artworks, only: [:index, :show, :new, :destroy] do
+  resources :artworks, only: [:index, :show, :new, :destroy, :create] do
     collection do
       get '/my-artworks', to: "artworks#owner_index", as: :owner
     end
