@@ -1,6 +1,24 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
+
+  resources :artworks, only: [:index, :show, :new, :destroy] do
+    collection do
+      get '/my_artworks', to: "artworks#owner_index", as: :owner
+    end
+    resources :bookings, only: [:new, :create]
+  end
+
+  resources :bookings, only: [:index] do
+    member do
+      patch '/checkout', to: "bookings#checkout"
+      patch '/accept', to: "bookings#accept"
+      patch '/decline', to: "bookings#decline"
+    end
+    collection do
+      get '/my-bookings', to: "bookings#owner_index", as: :owner
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
