@@ -1,0 +1,61 @@
+<nav style="display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid #ccc;">
+  <a href="<%= root_path %>" style="text-decoration: none; font-size: 1.5rem; font-weight: bold;">L'art chez vous</a>
+  <ul style="list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0;">
+    <li><a href="<%= artworks_path %>" style="text-decoration: none">Explorer</a></li>
+    <li><a href="<%= new_user_session_path %>" style="text-decoration: none">Se connecter</a></li>
+    <li><a href="<%= my_bookings_path %>" style="text-decoration: none">Mes réservations</a></li>
+  </ul>
+</nav>
+
+<div class="container mt-4">
+  <section style="display: flex; gap: 2rem;">
+
+    <div class="image-container" style="flex-shrink: 0; width: 30%;">
+      <img
+        src="<%= @artwork.image_url %>"
+        alt="<%= @artwork.title %>"
+        style="width: 100%; border-radius: 8px;">
+    </div>
+
+    <div style="flex-grow: 1; width: 40%;">
+      <h1><%= @artwork.title %></h1>
+      <div class="mt-2">
+        <i class="fas fa-paint-brush mr-3"></i>
+        <span><%= @artwork.artist.artist_display_name %></span>
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="fas fa-map-marker-alt mr-3"></i>
+        <span class="mr-2"><%= @artwork.artist.artist_nationality %></span>
+        <span class="mr-2"> • <%= @artwork.object_date %></span>
+      </div>
+      <div class="mt-4">
+        <p><strong>Genre :</strong> <%= @artwork.classification %></p>
+        <p><strong>Dimensions :</strong> <%= @artwork.dimensions %></p>
+        <p><strong>Prix par jour :</strong> <%= @artwork.price_by_day %></p>
+        <p><strong>Propriétaire :</strong> <%= @artwork.owner.first_name %> <%= @artwork.owner.last_name %></p>
+      </div>
+    </div>
+
+    <div style="width: 30%;">
+      <h2>Réservez cette œuvre</h2>
+      <%= simple_form_for [@artwork, @booking] do |f| %>
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.input :begin_date, as: :string, label: "Date de début", input_html: { type: 'date' } %>
+          </div>
+          <div class="col-md-6">
+            <%= f.input :end_date, as: :string, label: "Date de fin", input_html: { type: 'date' } %>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <%= f.button :submit, "Réserver", class: "btn btn-primary btn-lg" %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <hr>
+  <p class="text-center">© 2024 L'art chez vous - Tous droits réservés</p>
+</footer>
