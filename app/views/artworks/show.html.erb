@@ -1,0 +1,31 @@
+
+<div class="container mt-4">
+  <nav>
+    <p>Navbar</p>
+  </nav>
+  <h1 class="display-4"><%= @artwork.title %></h1>
+  <% if @artwork.image_url.present? %>
+    <img src="<%= @artwork.image_url %>" alt="<%= @artwork.title %>" class="img-fluid">
+  <% end %>
+  <p><strong>Artiste :</strong> <%= @artwork.artist.artist_display_name %></p>
+  <p><strong>Genre :</strong> <%= @artwork.classification %></p>
+  <p><strong>Date :</strong> <%= @artwork.object_date %></p>
+  <p><strong>Dimensions :</strong> <%= @artwork.dimensions %></p>
+  <p><strong>Prix par jour :</strong> <%= number_to_currency(@artwork.price_by_day) %></p>
+
+  <h2>Réserver l'oeuvre</h2>
+  <%= form_with model: [@artwork, @booking], local: true do |form| %>
+    <div>
+      <%= form.label :begin_date, "Date de début" %><br>
+      <%= form.date_field :begin_date %>
+    </div>
+    <div>
+      <%= form.label :end_date, "Date de fin" %><br>
+      <%= form.date_field :end_date %>
+    </div>
+    <%= form.submit "Réserver" %>
+  <% end %>
+  <footer>
+    <p>Footer</p>
+  </footer>
+</div>
