@@ -1,5 +1,4 @@
 <div class="container-fluid px-5">
-
   <div class="cards">
     <% @artworks.each do |artwork| %>
       <div class="card">
@@ -7,7 +6,7 @@
         <div class="card-artwork-infos">
           <div>
             <h2><%= artwork.title %></h2>
-            <h3><%= artwork.artist_display_name %></h3>
+            <h3><%= artwork.artist.artist_display_name %></h3>
             <p><%= artwork.classification %></p>
             <p><%= artwork.dimensions %></p>
             <p><%= artwork.price_by_day %> €/jour</p>
