@@ -6,5 +6,4 @@ class Artwork < ApplicationRecord
   validates :title, presence: true
   validates :image_url, presence: true
   validates :price_by_day, presence: true, numericality: { only_numeric: true, greater_than: 50 }
-  validates :classification, presence: true
 end
