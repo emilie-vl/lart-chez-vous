@@ -1,2 +1,5 @@
 <h1>Here you are :index of artworks</h1>
-<p><%=@artworks.all%></p>
+<%@artworks.each do |artwork|%>
+  <p><%= artwork.title %></p>
+
+  <% end %>
