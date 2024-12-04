@@ -30,7 +30,7 @@ artists.first(10).each do |artist|
   )
   artworks = JSON.parse(URI.parse("http://www.wikiart.org/en/App/Painting/PaintingsByArtist?artistUrl=#{artist['url']}&json=2").read)
   artworks.each do |artwork|
-  Artwork.create(
+  Artwork.create!(
     { artist: artist_object,
     title: artwork['title'],
     image_url: artwork['image'],
