@@ -1,4 +1,6 @@
 class ArtworksController < ApplicationController
+  skip_before_action :authenticate_user!, only: :show
+
   def index
     @artworks = Artwork.all
     if params[:search].present?
