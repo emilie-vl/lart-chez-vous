@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :bookings, only: [:new, :create]
   end
 
-  resources :bookings, only: [:index] do
+  resources :bookings, only: [:show, :index, :update] do
     member do
       patch '/checkout', to: "bookings#checkout"
       patch '/accept', to: "bookings#accept"
@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       get '/my-bookings', to: "bookings#owner_index", as: :owner
     end
   end
+
+  get '/dashboard', to: "dashboard#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

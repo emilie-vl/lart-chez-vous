@@ -1,0 +1,10 @@
+<div class="container">
+  <h1>Détails de la réservation</h1>
+
+  <p><strong>Oeuvre :</strong> <%= @booking.artwork.title %></p>
+  <p><strong>Du :</strong> <%= @booking.begin_date %></p>
+  <p><strong>Au :</strong> <%= @booking.end_date %></p>
+  <p><strong>Prix total :</strong> <%= @booking.price %> €</p>
+
+  <%= link_to "Retour à l'œuvre", artwork_path(@booking.artwork), class: "btn btn-secondary" %>
+</div>

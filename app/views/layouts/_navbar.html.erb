@@ -18,9 +18,11 @@
         <p class="quote">“Si jamais je reçois le roi à souper, j’aimerais qu’il puisse savourer ses chicons en admirant un Magritte...”</p>
       </div>
     </div>
-    <div id="magritte">
-      <%= image_tag "icone-magritte.png", width: "90px" %>
-    </div>
+    <%= link_to dashboard_path do %>
+      <div id="magritte">
+        <%= image_tag "icone-magritte.png", width: "90px" %>
+      </div>
+    <% end %>
     <div id="connect">
       <% if user_signed_in? %>
         <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-secondary" %>

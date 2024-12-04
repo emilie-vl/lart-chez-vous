@@ -29,6 +29,7 @@
     </div>
 
     <div class="col">
+
       <% unless @artwork.owner == current_user %>
         <h2>Réservez cette œuvre</h2>
         <%= simple_form_for [@artwork, @booking] do |f| %>
@@ -45,6 +46,18 @@
           </div>
         <% end %>
       <% end %>
+
+    <% if @booking.errors.any? %>
+      <div class="alert alert-danger">
+        <h4>Erreur(s) :</h4>
+        <ul>
+          <% @booking.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     </div>
   </section>
 
