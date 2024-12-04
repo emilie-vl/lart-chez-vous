@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :bookings, only: [:new, :create]
   end
 
-  resources :bookings, only: [:index] do
+  resources :bookings, only: [:show, :index, :update] do
     member do
       patch '/checkout', to: "bookings#checkout"
       patch '/accept', to: "bookings#accept"
