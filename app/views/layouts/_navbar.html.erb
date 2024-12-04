@@ -1,0 +1,34 @@
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container-fluid">
+    <div>
+      <%= link_to root_path do %>
+        <%= image_tag "logo.png", width: "200px"%>
+      <% end %>
+    </div>
+    <div>
+      <div id="search">
+        <%= simple_form_for :search, url: artworks_path, method: :get do |f| %>
+          <div class="input-group mb-3">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon1"><i class="fas fa-search"></i></button>
+            <input type="text" class="form-control" placeholder="Rechercher une œuvre" aria-label="Example text with button addon" aria-describedby="button-addon1" name="search">
+          </div>
+        <% end %>
+      </div>
+      <div id="baseline">
+        <p class="quote">“Si jamais je reçois le roi à souper, j’aimerais qu’il puisse savourer ses chicons en admirant un Magritte...”</p>
+      </div>
+    </div>
+    <div id="magritte">
+      <%= image_tag "icone-magritte.png", width: "90px" %>
+    </div>
+    <div id="connect">
+      <% if user_signed_in? %>
+        <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-secondary" %>
+      <% else %>
+        <%= link_to new_user_session_path, class: "btn btn-outline-secondary" do %>
+          <i class="fas fa-user"></i> Se connecter / S'inscrire
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
