@@ -8,8 +8,6 @@ class Artwork < ApplicationRecord
   validates :title, presence: true
   validates :price_by_day, presence: true, numericality: { only_numeric: true, greater_than: 50 }
 
-  validates :classification, presence: true
-
   def unavailable_dates
     bookings.pluck(:begin_date, :end_date)
   end
