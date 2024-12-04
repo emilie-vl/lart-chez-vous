@@ -31,6 +31,14 @@ class BookingsController < ApplicationController
     end
   end
 
+  def accept
+    @booking = Booking.find(params[:id])
+    @booking.validated = true
+    if @booking.save
+      redirect_to dashboard_path
+    end
+  end
+
   def show
     @booking = Booking.find(params[:id])
   end
