@@ -4,3 +4,11 @@
   right: 16px;
   z-index: 1000;
 }
+
+.alert-dashboard {
+  background-color: $light;
+  border-radius: 5px;
+  border: 1px solid $dark;
+  padding: 10px;
+  margin: 10px 0;
+}

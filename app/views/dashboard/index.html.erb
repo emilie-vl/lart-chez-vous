@@ -1,38 +1,25 @@
-<div class="container-fluid">
+<div class="container-fluid" data-controller="dashboard-tabs">
   <h1 class="mb-3"><%= @user.first_name %> <%= @user.last_name %></h1>
-  <ul class="list-inline tabs-underlined mb-3">
+  <ul class="list-inline tabs-underlined mb-3" data-dashboard-tabs-target="tabsUl">
     <li>
-      <a href="#" class="tab-underlined active">My rentals</a>
+      <a href="#" class="tab-underlined active" data-action="click->dashboard-tabs#showRentals">Mes réservations</a>
     </li>
     <li>
-      <a href="#" class="tab-underlined">My artworks</a>
+      <a href="#" class="tab-underlined" data-action="click->dashboard-tabs#showArtworks">Mes œuvres d'art</a>
     </li>
     <li>
-      <a href="#" class="tab-underlined">My bookings</a>
+      <a href="#" class="tab-underlined" data-action="click->dashboard-tabs#showBookings">Mes locations</a>
     </li>
   </ul>
   <div class="row mt-4">
-    <div class="col">
-      <div class="cards">
-        <% @artworks.each do |artwork| %>
-          <%= link_to artwork_path(artwork) do %>
-            <div class="card">
-              <img
-          src="<%= artwork.image_url.presence || cl_image_path(artwork.photo.key) %>"
-          alt="<%= artwork.title %>">
-                <div class="card-artwork-infos">
-                  <div>
-                    <h2><%= artwork.title %></h2>
-                    <h3><%= artwork.artist.artist_display_name %></h3>
-                    <p><%= artwork.classification %></p>
-                    <p><%= artwork.dimensions %></p>
-                    <p><%= artwork.price_by_day %> €/jour</p>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
+    <div class="col d-none" data-dashboard-tabs-target="myArtworks">
+      <%= render "my_artworks" %>
+    </div>
+    <div class="col" data-dashboard-tabs-target="myRentals">
+      <%= render "my_rentals" %>
+    </div>
+    <div class="col d-none" data-dashboard-tabs-target="myBookings">
+      <%= render "my_bookings" %>
     </div>
   </div>
+</div>
