@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <h1 class="mb-3"><%= @user.first_name %> <%= @user.last_name %></h1>
+  <ul class="list-inline tabs-underlined mb-3">
+    <li>
+      <a href="#" class="tab-underlined active">My rentals</a>
+    </li>
+    <li>
+      <a href="#" class="tab-underlined">My artworks</a>
+    </li>
+    <li>
+      <a href="#" class="tab-underlined">My bookings</a>
+    </li>
+  </ul>
+  <div class="row mt-4">
+    <div class="col">
+      <div class="cards">
+        <% @artworks.each do |artwork| %>
+          <%= link_to artwork_path(artwork) do %>
+            <div class="card">
+              <img
+          src="<%= artwork.image_url.presence || cl_image_path(artwork.photo.key) %>"
+          alt="<%= artwork.title %>">
+                <div class="card-artwork-infos">
+                  <div>
+                    <h2><%= artwork.title %></h2>
+                    <h3><%= artwork.artist.artist_display_name %></h3>
+                    <p><%= artwork.classification %></p>
+                    <p><%= artwork.dimensions %></p>
+                    <p><%= artwork.price_by_day %> €/jour</p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
