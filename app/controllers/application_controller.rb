@@ -7,4 +7,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :address])
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :address])
   end
+
+  protected
+
+  def after_sign_out_path_for(_resource)
+    session.delete("user_return_to")
+    root_path
+  end
 end
