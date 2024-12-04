@@ -1,18 +1,20 @@
 <div class="container-fluid px-5">
   <div class="cards">
     <% @artworks.each do |artwork| %>
-      <div class="card">
-        <%= image_tag artwork.image_url %>
-        <div class="card-artwork-infos">
-          <div>
-            <h2><%= artwork.title %></h2>
-            <h3><%= artwork.artist.artist_display_name %></h3>
-            <p><%= artwork.classification %></p>
-            <p><%= artwork.dimensions %></p>
-            <p><%= artwork.price_by_day %> €/jour</p>
+      <%= link_to artwork_path(artwork) do %>
+        <div class="card">
+          <%= image_tag artwork.image_url %>
+          <div class="card-artwork-infos">
+            <div>
+              <h2><%= artwork.title %></h2>
+              <h3><%= artwork.artist.artist_display_name %></h3>
+              <p><%= artwork.classification %></p>
+              <p><%= artwork.dimensions %></p>
+              <p><%= artwork.price_by_day %> €/jour</p>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>

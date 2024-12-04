@@ -7,7 +7,6 @@
 @import "bootstrap";
 @import "font-awesome";
 
-
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
@@ -29,6 +28,12 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 30px;
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 .cards .card {
@@ -37,6 +42,11 @@ body {
   height: 310px;
   width: 100%;
   margin-bottom: 20px;
+  transition: 0.3s ease;
+  &:hover {
+    text-decoration: none;
+    transform: scale(1.05);
+  }
 }
 
 .card img {
@@ -50,21 +60,21 @@ body {
 }
 
 .card-artwork-infos h2 {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 16px;
   margin: 10px 0;
   font-weight: 700;
 }
 
 .card-artwork-infos h3 {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 13px;
   margin: 5px 0;
   font-weight: 400;
 }
 
 .card-artwork-infos p {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 11px;
   color: #555;
   margin: 5px 0;
