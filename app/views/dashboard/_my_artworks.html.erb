@@ -9,12 +9,12 @@
             <div>
               <h2><%= artwork.title %></h2>
               <h3><%= artwork.artist.artist_display_name %></h3>
-              <p><%= artwork.classification %></p>
               <p><%= artwork.dimensions %></p>
               <p><%= artwork.price_by_day %> €/jour</p>
+              <%= link_to "Supprimer", destroy_artwork_path(artwork), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette œuvre ?"}, class: 'btn btn-danger mt-3' %>
             </div>
           </div>
-        </div>
-      <% end %>
+      </div>
     <% end %>
-  </div>
+  <% end %>
+</div>
