@@ -7,6 +7,7 @@ class ArtworksController < ApplicationController
 
   end
   def show
+    store_location_for(:user, request.fullpath)
     @artwork = Artwork.find(params[:id])
     @booking = Booking.new
   end
