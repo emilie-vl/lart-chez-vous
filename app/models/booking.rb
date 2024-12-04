@@ -7,9 +7,14 @@ class Booking < ApplicationRecord
   validates_comparison_of :begin_date, less_than: :end_date, greater_than: -> { Date.today }
 
   validate :no_overlapping_bookings
+  validate :validate_date_order
 
   def calculate_price
-    (end_date - begin_date).to_i * artwork.price_by_day
+    if begin_date.nil? || end_date.nil?
+      return 0
+    else
+      (end_date - begin_date).to_i * artwork.price_by_day
+    end
   end
 
   private
@@ -20,7 +25,17 @@ class Booking < ApplicationRecord
       begin_date, end_date
     )
     if overlapping_bookings.exists?
-      errors.add(:begin_date, "L'oeuvre est déjà réservée à ces dates.")
+      errors.add(:base, "L'oeuvre est déjà réservée à ces dates.")
+    end
+  end
+
+  def validate_date_order
+    return if begin_date.blank? || end_date.blank?
+
+    if begin_date >= end_date
+      errors.add(:begin_date, "doit être avant la date de fin.")
+    elsif begin_date <= Date.today
+      errors.add(:begin_date, "doit être après aujourd'hui.")
     end
   end
 end
