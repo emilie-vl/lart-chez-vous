@@ -2,7 +2,7 @@
   <div class="cards">
     <% @artworks.each do |artwork| %>
       <%= link_to artwork_path(artwork) do %>
-        <%render partial: "application/card", artwork: @artwork%>
+        <%=render partial: "application/card", locals: {artwork: artwork}%>
         <% end %>
       <% end %>
     </div>
