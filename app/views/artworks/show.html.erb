@@ -4,7 +4,7 @@
     <div class="col-md-4">
       <div class="image-container">
         <img
-          src="<%= @artwork.image_url.presence || cl_image_path(@artwork.image.key) %>"
+          src="<%= @artwork.image_url.presence || cl_image_path(@artwork.photo.key) %>"
           alt="<%= @artwork.title %>"
           class="img-fluid rounded">
       </div>
