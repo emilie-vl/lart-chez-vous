@@ -4,7 +4,7 @@
     <div class="col-md-4">
       <div class="image-container">
         <img
-          src="<%= @artwork.image_url.presence || cl_image_path(@artwork.image.key) %>"
+          src="<%= @artwork.image_url.presence || cl_image_path(@artwork.photo.key) %>"
           alt="<%= @artwork.title %>"
           class="img-fluid rounded">
       </div>
@@ -52,7 +52,7 @@
       <% @artwork.similar_artworks.each do |similar_artwork| %>
         <div class="col-md-3 text-center">
           <a href="<%= artwork_path(similar_artwork) %>">
-            <img src="<%= similar_artwork.image_url.presence || cl_image_path(similar_artwork.image.key) %>"
+            <img src="<%= similar_artwork.image_url.presence || cl_image_path(similar_artwork.photo.key) %>"
                  alt="<%= similar_artwork.title %>"
                  class="img-fluid rounded mb-2">
             <p><%= similar_artwork.title %></p>
