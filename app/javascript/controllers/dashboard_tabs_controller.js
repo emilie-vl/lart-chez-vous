@@ -16,9 +16,7 @@ export default class extends Controller {
       this.showRentals();
     }
 
-    if (hash) {
-      window.history.replaceState(null, null, hash);
-    }
+    window.history.replaceState(null, null, hash || "#myRentals");
   }
 
   showArtworks(event = null) {
