@@ -50,15 +50,21 @@
   </section>
 
   <h3 class="text-center mt-5 mb-3">Œuvres du même artiste</h3>
-  <div class="row">
+  <div class="row g-4">
     <% if @artwork.similar_artworks.any? %>
       <% @artwork.similar_artworks.each do |similar_artwork| %>
-        <div class="col-md-3 text-center">
-          <a href="<%= artwork_path(similar_artwork) %>">
-            <img src="<%= similar_artwork.image_url.presence || cl_image_path(similar_artwork.photo.key) %>"
-                 alt="<%= similar_artwork.title %>"
-                 class="img-fluid rounded mb-2">
-            <p><%= similar_artwork.title %></p>
+        <div class="col-md-3 col-sm-6 text-center">
+          <a href="<%= artwork_path(similar_artwork) %>" class="text-decoration-none text-dark">
+            <div class="card border-0 shadow-sm h-100">
+              <img src="<%= similar_artwork.image_url.presence || cl_image_path(similar_artwork.photo.key) %>"
+                  alt="<%= similar_artwork.title %>"
+                  class="card-img-top img-fluid rounded">
+              <div class="card-body d-flex justify-content-center align-items-center p-3">
+                <h6 class="card-title text-truncate mb-0 text-center" title="<%= similar_artwork.title %>">
+                  <%= similar_artwork.title %>
+                </h6>
+              </div>
+            </div>
           </a>
         </div>
       <% end %>
