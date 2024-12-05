@@ -1,9 +1,25 @@
-<%= simple_form_for @artwork do |f| %>
-  <%= f.input :title, label: "Artwork title" %>
-  <%= f.input :object_date, label: "Date of creation" %>
-  <%= f.input :dimensions %>
-  <%= f.input :price_by_day %>
-  <%= f.association :artist, label_method: :artist_display_name %>
-  <%= f.input :photo, as: :file %>
-  <%= f.submit %>
-<% end %>
+<div class="container">
+  <%= simple_form_for @artwork do |f| %>
+    <div class="form-group">
+      <%= f.input :title, label: "Titre de l'œuvre", input_html: { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :object_date, label: "Date de création", input_html: { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :dimensions, label: "Dimensions", input_html: { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :price_by_day, label: "Prix par jour", input_html: { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.association :artist, label: "Artiste", label_method: :artist_display_name, input_html: { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :photo, as: :file, label: "Photo", input_html: { class: 'form-control-file' } %>
+    </div>
+    <div class="form-group">
+      <%= f.submit 'Soumettre', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
