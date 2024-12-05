@@ -56,11 +56,24 @@ body {
 }
 
 .card-artwork-infos {
+  position: relative;
   padding: 5px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card-artwork-infos h2,
+.card-artwork-infos h3,
+.card-artwork-infos p {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-artwork-infos h2 {
   font-family: "Lato", sans-serif;
+  color: #555;
   font-size: 16px;
   margin: 10px 0;
   font-weight: 700;
@@ -68,6 +81,7 @@ body {
 
 .card-artwork-infos h3 {
   font-family: "Lato", sans-serif;
+  color: #555;
   font-size: 13px;
   margin: 5px 0;
   font-weight: 400;
@@ -78,4 +92,38 @@ body {
   font-size: 11px;
   color: #555;
   margin: 5px 0;
+}
+
+.price-and-trash {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  width: 100%;
+}
+
+.price-and-trash p {
+  margin: 0;
+  font-size: 11px;
+  color: #555;
+}
+
+.delete-link {
+  color: red;
+  text-decoration: none;
+  font-size: 14px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.delete-link i {
+  margin-left: 5px;
+  font-size: 10px;
+}
+
+.delete-link:hover {
+  color: darkred;
 }
