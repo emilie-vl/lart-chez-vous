@@ -46,22 +46,10 @@
           </div>
         <% end %>
       <% end %>
-
-    <% if @booking.errors.any? %>
-      <div class="alert alert-danger">
-        <h4>Erreur(s) :</h4>
-        <ul>
-          <% @booking.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
     </div>
   </section>
 
-  <h3 class="text-center mt-5 mb-3">Œuvres similaires</h3>
+  <h3 class="text-center mt-5 mb-3">Œuvres du même artiste</h3>
   <div class="row">
     <% if @artwork.similar_artworks.any? %>
       <% @artwork.similar_artworks.each do |similar_artwork| %>
