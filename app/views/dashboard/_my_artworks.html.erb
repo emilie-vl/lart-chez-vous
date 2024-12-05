@@ -1,20 +1,7 @@
 <div class="cards">
   <% @artworks.each do |artwork| %>
     <%= link_to artwork_path(artwork) do %>
-      <div class="card">
-        <img
-          src="<%= artwork.image_url.presence || cl_image_path(artwork.photo.key) %>"
-          alt="<%= artwork.title %>">
-          <div class="card-artwork-infos">
-            <div>
-              <h2><%= artwork.title %></h2>
-              <h3><%= artwork.artist.artist_display_name %></h3>
-              <p><%= artwork.classification %></p>
-              <p><%= artwork.dimensions %></p>
-              <p><%= artwork.price_by_day %> €/jour</p>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <%=render partial: "application/card", locals: {artwork: artwork}%>
+        <% end %>
     <% end %>
   </div>
