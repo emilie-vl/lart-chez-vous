@@ -1,9 +1,76 @@
-<div class="container-fluid px-5">
-  <div class="cards">
-    <% @artworks.each do |artwork| %>
-      <%= link_to artwork_path(artwork) do %>
-        <%=render partial: "application/card", locals: {artwork: artwork}%>
-        <% end %>
-      <% end %>
+<section class="hero-section-wrapper-1">
+  <!-- ========================= hero-1 start ========================= -->
+  <div class="hero-section hero-style-1 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="hero-content-wrapper">
+            <h2 class="leckerli">Faites venir des œuvres d'art sur vos murs !</h2>
+            <p>L'art chez vous, c'est la plus grande offre d'œuvres d'art en location au monde. À cette date, <%= @artwork_count %> œuvres disponibles !</p>
+            <div class="d-flex justify-content-between">
+              <% if current_user %>
+                <%= link_to "Mon compte", dashboard_path, class:"button button-lg radius-10-0" %>
+                <%= link_to "Voir toutes les œuvres", artworks_path, class:"button border-button button-lg radius-10-0" %>
+              <% else %>
+                <%= link_to "S'inscrire", new_user_registration_path, class:"button button-lg radius-10-0" %>
+                <%= link_to "Se connecter", new_user_session_path, class:"button border-button button-lg radius-10-0" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="hero-content-wrapper">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <% @artworks.each do |artwork| %>
+                  <div class="carousel-item <%= "active" if @artworks.first == artwork %>">
+                    <%= cl_image_tag artwork.photo.key, height: 400, width: 400, crop: "fill", class: "d-block w-100", alt: "#{artwork.title}" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <!-- ========================= hero-1 end ========================= -->
+</section>
+<section class="home-map mb-5" style="width: 100%; height: 600px;"
+  data-controller="home-map"
+  data-home-map-markers-value="<%= @markers.to_json %>"
+  data-home-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  <div class="home-title leckerli">Découvrez nos œuvres</div>
+</section>
+<section class="hero-section-wrapper-1 container-fluid">
+  <h3 class="home-title leckerli text-center mb-5">Sans engagement, sans prise de tête...</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card h-100">
+        <%= image_tag("home-card1.svg", class: "home-card-img") %>
+        <div class="card-body">
+          <h5 class="card-title">Je vois, je loue</h5>
+          <p class="card-text">Une œuvre me plaît, je la réserve. Si le propriétaire est OK, elle est à moi le temps de ma location.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <%= image_tag("home-card2.svg", class: "home-card-img") %>
+        <div class="card-body">
+          <h5 class="card-title">L'assurance ? C'est nous !</h5>
+          <p class="card-text">Vous louez l'esprit libre, car tous les frais annexes sont compris dans le tarif annoncé !</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <%= image_tag("home-card3.svg", class: "home-card-img") %>
+        <div class="card-body">
+          <h5 class="card-title">Aucune copie</h5>
+          <p class="card-text">A la différence d'autres sites aux tarifs attractifs mais trompeurs, nous garantissons notre catalogue, composé de <%= @artwork_count %> œuvres d'art originales !</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
