@@ -1,10 +1,11 @@
 <div class="cards">
   <% @artworks.each do |artwork| %>
-    <%= link_to artwork_path(artwork) do %>
-      <div class="card">
-        <img
-          src="<%= artwork.image_url.presence || cl_image_path(artwork.photo.key) %>"
-          alt="<%= artwork.title %>">
+    <div class="card-wrapper">
+      <%= link_to artwork_path(artwork), class: 'card-link' do %>
+        <div class="card">
+          <img
+            src="<%= artwork.image_url.presence || cl_image_path(artwork.photo.key) %>"
+            alt="<%= artwork.title %>">
           <div class="card-artwork-infos">
             <div>
               <h2><%= artwork.title %></h2>
@@ -20,7 +21,8 @@
               </div>
             </div>
           </div>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </div>
