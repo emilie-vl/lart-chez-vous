@@ -36,9 +36,41 @@
   </div>
   <!-- ========================= hero-1 end ========================= -->
 </section>
-<div class="home-map" style="width: 100%; height: 600px;"
+<section class="home-map mb-5" style="width: 100%; height: 600px;"
   data-controller="home-map"
   data-home-map-markers-value="<%= @markers.to_json %>"
   data-home-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   <div class="home-title leckerli">Découvrez nos œuvres</div>
-</div>
+</section>
+<section class="hero-section-wrapper-1 container-fluid">
+  <h3 class="home-title leckerli text-center mb-5">Sans engagement, sans prise de tête...</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card h-100">
+        <%= image_tag("home-card1.svg", class: "home-card-img") %>
+        <div class="card-body">
+          <h5 class="card-title">Je vois, je loue</h5>
+          <p class="card-text">Une œuvre me plaît, je la réserve. Si le propriétaire est OK, elle est à moi le temps de ma location.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <%= image_tag("home-card2.svg", class: "home-card-img") %>
+        <div class="card-body">
+          <h5 class="card-title">L'assurance ? C'est nous !</h5>
+          <p class="card-text">Vous louez l'esprit libre, car tous les frais annexes sont compris dans le tarif annoncé !</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <%= image_tag("home-card3.svg", class: "home-card-img") %>
+        <div class="card-body">
+          <h5 class="card-title">Aucune copie</h5>
+          <p class="card-text">A la différence d'autres sites aux tarifs attractifs mais trompeurs, nous garantissons notre catalogue, composé de <%= @artwork_count %> œuvres d'art originales !</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
