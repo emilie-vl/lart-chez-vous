@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <h2 class="mb-4">Edit <%= resource_name.to_s.humanize %></h2>
+  <h2 class="mb-4">Editer son profil</h2>
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form" }) do |f| %>
     <%= f.error_notification %>
     <div class="form-inputs">
@@ -27,7 +27,7 @@
 
       <div class="form-group">
         <%= f.input :password,
-                    hint: "leave it blank if you don't want to change it",
+                    hint: t('devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it'),
                     required: false,
                     input_html: { class: 'form-control', autocomplete: "new-password" },
                     label: t('devise.registrations.edit.password') %>
@@ -42,23 +42,22 @@
 
       <div class="form-group">
         <%= f.input :current_password,
-                    hint: "we need your current password to confirm your changes",
+                    hint: t('devise.registrations.edit.we_need_your_current_password_to_confirm_your_changes'),
                     required: true,
                     input_html: { class: 'form-control', autocomplete: "current-password" },
                     label: t('devise.registrations.edit.current_password') %>
       </div>
     </div>
 
-    <div class="form-actions">
-      <%= f.button :submit, "Update", class: "btn btn-primary" %>
+    <div class="form-actions d-flex justify-content-between mt-3">
+      <%= f.button :submit, t('devise.registrations.edit.update'), class: "btn btn-success" %>
+      <%= link_to t('devise.registrations.edit.back'), :back, class: "btn btn-outline-secondary" %>
     </div>
   <% end %>
 
-  <!-- Commented out cancel account functionality -->
   <!--
   <h3>Cancel my account</h3>
   <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %></div>
   -->
 
-  <%= link_to "Back", :back, class: "btn btn-outline-secondary" %>
 </div>
