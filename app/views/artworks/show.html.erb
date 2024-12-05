@@ -22,7 +22,7 @@
       </div>
       <div class="mt-4">
         <p><strong>Dimensions :</strong> <%= @artwork.dimensions || "Non spécifiées" %></p>
-        <p><strong>Prix par jour :</strong> <%= @artwork.price_by_day %> €</p>
+        <p><strong>Prix par jour :</strong> <%= number_with_precision(@artwork.price_by_day, precision: 0) %> €</p>
         <p><strong>Propriétaire :</strong> <%= @artwork.owner.first_name %> <%= @artwork.owner.last_name %></p>
         <%# <p><strong>Commentaire :</strong><%= @artwork.comments.last.content || "Aucun commentaire disponible" %></p>
       </div>
