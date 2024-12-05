@@ -124,7 +124,8 @@ User.all.each do |user|
     booking = Booking.new({
       begin_date: Date.today - rand(365),
       renter: user,
-      artwork: artwork
+      artwork: artwork,
+      processed: true
     })
     booking.end_date = booking.begin_date + rand(1..10)
     booking.price = artwork.price_by_day * (booking.end_date - booking.begin_date)
