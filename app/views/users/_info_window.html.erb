@@ -1,5 +1,5 @@
 <% user.owned_artworks.each do |artwork| %>
-  <% if current_user %>
+  <% if user_signed_in? %>
     <%= link_to artwork_path(artwork), class: "popup-link" do %>
       <div class="d-flex justify-content-between mb-2">
         <%= cl_image_tag artwork.photo.key, height: 100, width: 100, crop: "fill", alt: "#{artwork.title}", class: "mr-2" %>
