@@ -1,0 +1,16 @@
+<div class="card">
+  <% if artwork.photo.attached? %>
+    <%= cl_image_tag artwork.photo.key, height: 200, width: 200, crop: :fill %>
+  <% else %>
+    <div class= "missing_picture text-center"></div>
+  <%end%>
+  <div class="card-artwork-infos">
+    <div>
+      <h2><%= artwork.title %></h2>
+      <h3><%= artwork.artist.artist_display_name %></h3>
+      <p><%= artwork.classification %></p>
+      <p><%= artwork.dimensions %></p>
+      <p><%= artwork.price_by_day %> €/jour</p>
+    </div>
+  </div>
+</div>

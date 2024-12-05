@@ -1,4 +1,6 @@
 class ArtworksController < ApplicationController
+  skip_before_action :authenticate_user!, only: :show
+
   def index
     @artworks = Artwork.all
     if params[:search].present?
@@ -7,6 +9,7 @@ class ArtworksController < ApplicationController
 
   end
   def show
+    store_location_for(:user, request.fullpath)
     @artwork = Artwork.find(params[:id])
     @booking = Booking.new
   end
