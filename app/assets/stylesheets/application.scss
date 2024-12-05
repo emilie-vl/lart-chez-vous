@@ -32,7 +32,7 @@ body {
 
 .cards {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(6, 1fr);
   gap: 30px;
   a {
     text-decoration: none;
@@ -42,6 +42,15 @@ body {
   }
 }
 
+.cards a.card-link {
+  display: block;
+  text-decoration: none;
+}
+
+.cards .card-wrapper {
+  display: flex;
+}
+
 .cards .card {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 0;
@@ -49,6 +58,9 @@ body {
   width: 100%;
   margin-bottom: 20px;
   transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   &:hover {
     text-decoration: none;
     transform: scale(1.05);
@@ -62,11 +74,17 @@ body {
 }
 
 .card-artwork-infos {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
   padding: 5px;
+  overflow: hidden;
 }
+
 
 .card-artwork-infos h2 {
   font-family: "Lato", sans-serif;
+  color: #555;
   font-size: 16px;
   margin: 10px 0;
   font-weight: 700;
@@ -74,6 +92,7 @@ body {
 
 .card-artwork-infos h3 {
   font-family: "Lato", sans-serif;
+  color: #555;
   font-size: 13px;
   margin: 5px 0;
   font-weight: 400;
@@ -84,4 +103,40 @@ body {
   font-size: 11px;
   color: #555;
   margin: 5px 0;
+}
+
+.price-and-trash {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  width: 100%;
+  min-height: 30px;
+}
+
+.price-and-trash p {
+  margin: 0;
+  font-size: 11px;
+  color: #555;
+}
+
+.delete-link {
+  color: red;
+  text-decoration: none;
+  font-size: 14px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.delete-link i {
+  margin-left: 5px;
+  font-size: 16px;
+}
+
+.delete-link:hover i {
+  color: darkred;
+  transform: scale(1.2);
 }

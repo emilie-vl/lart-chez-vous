@@ -1,7 +1,28 @@
 <div class="cards">
   <% @artworks.each do |artwork| %>
-    <%= link_to artwork_path(artwork) do %>
-      <%=render partial: "application/card", locals: {artwork: artwork}%>
-        <% end %>
-    <% end %>
-  </div>
+    <div class="card-wrapper">
+      <%= link_to artwork_path(artwork), class: 'card-link' do %>
+        <div class="card">
+          <img
+            src="<%= artwork.image_url.presence || cl_image_path(artwork.photo.key) %>"
+            alt="<%= artwork.title %>">
+          <div class="card-artwork-infos">
+            <div>
+              <h2><%= artwork.title %></h2>
+              <h3><%= artwork.artist.artist_display_name %></h3>
+              <p><%= artwork.dimensions %></p>
+              <div class="price-and-trash">
+                <p><%= artwork.price_by_day %> €/jour</p>
+                <% if current_user.present? && current_user.id == artwork.owner_id %>
+                  <%= link_to destroy_artwork_path(artwork), data: { turbo: false }, class: 'delete-link' do %>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
