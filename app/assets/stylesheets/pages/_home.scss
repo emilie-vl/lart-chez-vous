@@ -5,3 +5,18 @@
     font-weight: 700;
   }
 }
+
+.home-map {
+  position: relative;
+
+  .home-title {
+    position: absolute;
+    top: 20px;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.742);
+    font-size: 3rem;
+    left: 20px;
+    padding: 20px;
+    border-radius: 15px;
+  }
+}
