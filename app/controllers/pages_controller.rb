@@ -13,7 +13,7 @@ class PagesController < ApplicationController
       {
         lat: user.latitude,
         lng: user.longitude,
-        info_window_html: render_to_string(partial: "users/info_window", locals: {user: user})
+        user_id: user.id
       }
       end
     end
