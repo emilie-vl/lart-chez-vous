@@ -27,13 +27,17 @@
 #       "yes": yup
 #       enabled: "ON"
 
-en:
+fr:
   hello: "Hello world"
 
   activerecord:
     models:
+      booking: Réservation
       user: Client
     attributes:
+      booking:
+        begin_date: Date de début
+        end_date: Date de fin
       user:
         email: "Email"
         password: "Mot de passe"

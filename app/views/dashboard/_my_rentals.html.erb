@@ -20,10 +20,12 @@
             <td><%= rental.end_date.strftime("%d/%m/%y") %></td>
             <td><%= rental.artwork.owner.first_name %> <%= rental.artwork.owner.last_name %></td>
             <td><%= rental.price %> €</td>
-            <td><% if rental.validated == false %>
+            <td><% if rental.validated == false && rental.processed == false %>
                 <span class="badge text-bg-warning">A valider par le propriétaire</span>
-              <% else %>
+              <% elsif rental.validated == true && rental.processed == true %>
                 <span class="badge text-bg-success">Réservation validée</span>
+              <% else %>
+                <span class="badge text-bg-danger">Réservation refusée</span>
               <% end %>
             </td>
           </tr>

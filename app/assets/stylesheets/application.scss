@@ -6,13 +6,19 @@
 // External libraries
 @import "bootstrap";
 @import "font-awesome";
+@import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
+@import "config/animate";
+@import "config/glightbox";
+@import "config/lindy";
+@import "config/line_icons";
+@import "config/tiny_slider";
 
 // Your CSS partials
 @import "components/index";
-@import "pages/index";
 @import "components/footer";
 @import "components/buttons";
 @import "components/devise";
+@import "pages/index";
 
 body {
   height: 100%;

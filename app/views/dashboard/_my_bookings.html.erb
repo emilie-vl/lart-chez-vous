@@ -1,7 +1,7 @@
 <div class="table-responsive small">
   <% unless @bookings_to_validate.empty? %>
     <h2>Mes locations à valider</h2>
-    <table class="table table-striped table-sm">
+    <table class="table table-striped table-sm" id="bookings-to-validate">
       <thead>
         <tr>
           <th scope="col">Œuvre louée</th>
@@ -15,12 +15,21 @@
       <tbody>
         <% @bookings_to_validate.each do |rental| %>
           <tr>
-            <td><%= rental.artwork.title %></td>
-            <td><%= rental.begin_date.strftime("%d/%m/%y") %></td>
-            <td><%= rental.end_date.strftime("%d/%m/%y") %></td>
-            <td><%= rental.renter.first_name %> <%= rental.renter.last_name %></td>
-            <td><%= rental.price %> €</td>
-            <td><%= link_to "Valider", accept_booking_path(rental), data: { turbo_method: :patch } %></td>
+            <td class="center-vertical"><%= rental.artwork.title %></td>
+            <td class="center-vertical"><%= rental.begin_date.strftime("%d/%m/%y") %></td>
+            <td class="center-vertical"><%= rental.end_date.strftime("%d/%m/%y") %></td>
+            <td class="center-vertical"><%= rental.renter.first_name %> <%= rental.renter.last_name %></td>
+            <td class="center-vertical"><%= rental.price %> €</td>
+            <td class="center-vertical">
+              <div class="btn-group">
+                <%= link_to accept_booking_path(rental), data: { turbo_method: :patch, turbo_confirm: "Validez-vous la location ?" }, class: "btn btn-sm btn-light" do %>
+                  <i class="fa-regular fa-thumbs-up"></i>
+                <% end %>
+                <%= link_to decline_booking_path(rental), data: { turbo_method: :patch, turbo_confirm: "Je confirme ce refus." }, class: "btn btn-sm btn-secondary" do %>
+                  <i class="fa-regular fa-thumbs-down"></i>
+                <% end %>
+              </div>
+            </td>
           </tr>
         <% end %>
       </tbody>
@@ -40,6 +49,31 @@
       </thead>
       <tbody>
         <% @bookings_validated.each do |rental| %>
+          <tr>
+            <td><%= rental.artwork.title %></td>
+            <td><%= rental.begin_date.strftime("%d/%m/%y") %></td>
+            <td><%= rental.end_date.strftime("%d/%m/%y") %></td>
+            <td><%= rental.renter.first_name %> <%= rental.renter.last_name %></td>
+            <td><%= rental.price %> €</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  <% unless @bookings_declined.empty? %>
+    <h2>Mes locations refusées</h2>
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Œuvre louée</th>
+          <th scope="col">Date de début</th>
+          <th scope="col">Date de fin</th>
+          <th scope="col">Locataire</th>
+          <th scope="col">Montant total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bookings_declined.each do |rental| %>
           <tr>
             <td><%= rental.artwork.title %></td>
             <td><%= rental.begin_date.strftime("%d/%m/%y") %></td>

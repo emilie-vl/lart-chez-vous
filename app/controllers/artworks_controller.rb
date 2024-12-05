@@ -4,7 +4,7 @@ class ArtworksController < ApplicationController
   def index
     @artworks = Artwork.all
     if params[:search].present?
-      @artworks = @artworks.where(title: params[:search])
+      @artworks = Artwork.search_by_title_and_artist_display_name(params[:search])
     end
 
   end
