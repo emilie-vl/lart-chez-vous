@@ -1,0 +1,21 @@
+<% user.owned_artworks.each do |artwork| %>
+  <% if current_user %>
+    <%= link_to artwork_path(artwork), class: "popup-link" do %>
+      <div class="d-flex justify-content-between mb-2">
+        <%= cl_image_tag artwork.photo.key, height: 100, width: 100, crop: "fill", alt: "#{artwork.title}", class: "mr-2" %>
+        <div class="d-grid w-100 justify-content-between align-items-baseline mb-3">
+          <p class="mb-1"><%= artwork.title %></p>
+          <small><%= artwork.artist.artist_display_name %></small>
+        </div>
+      </div>
+    <%end%>
+  <% else %>
+    <div class="d-flex justify-content-between mb-2">
+      <%= cl_image_tag artwork.photo.key, height: 100, width: 100, crop: "fill", alt: "#{artwork.title}", class: "mr-2" %>
+      <div class="d-grid w-100 justify-content-between align-items-baseline mb-3">
+        <p class="mb-1"><%= artwork.title %></p>
+        <small><%= artwork.artist.artist_display_name %></small>
+      </div>
+    </div>
+  <% end %>
+<% end %>
