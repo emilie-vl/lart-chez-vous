@@ -1,0 +1,15 @@
+<div class="super-admin-cards">
+  <% @artworks.each do |artwork| %>
+    <div>
+      <%= link_to artwork_path(artwork), 
+          data: { turbo_method: :delete },
+          class: "d-block" do %>
+        <%= cl_image_tag(artwork.photo.key,
+              class: "img-fluid rounded shadow-sm",
+              aspect_ratio: "1.0",
+              crop: :fill,
+              loading: "lazy") %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
