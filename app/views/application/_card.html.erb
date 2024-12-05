@@ -8,9 +8,11 @@
     <div>
       <h2><%= artwork.title %></h2>
       <h3><%= artwork.artist.artist_display_name %></h3>
-      <p><%= artwork.classification %></p>
       <p><%= artwork.dimensions %></p>
       <p><%= artwork.price_by_day %> €/jour</p>
+      <% if current_user.present? && current_user.id == artwork.owner_id %>
+        <%= link_to "Supprimer", destroy_artwork_path(artwork), data: { turbo: false }, class: 'btn btn-danger mt-3' %>
+      <% end %>
     </div>
   </div>
 </div>

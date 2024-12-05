@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   get '/dashboard', to: "dashboard#index"
-  delete 'dashboard/artworks/:id', to: 'dashboard#destroy_artwork', as: 'destroy_artwork'
+  get 'dashboard/artworks/:id', to: 'dashboard#destroy_artwork', as: 'destroy_artwork'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
