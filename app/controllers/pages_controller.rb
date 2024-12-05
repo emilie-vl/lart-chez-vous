@@ -3,8 +3,9 @@ class PagesController < ApplicationController
 
   def home
     @artworks = []
-    12.times do
+    20.times do
       @artworks << Artwork.all.sample
     end
+    @artwork_count = Artwork.all.count
   end
 end
