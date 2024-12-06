@@ -1,61 +1,80 @@
-<div class="container-fluid mt-4 px-5">
-  <section class="row">
-    <div class="col-md-4">
-      <div class="image-container">
+
+<div class="container mt-5">
+  <section class="row justify-content-center">
+
+    <div class="col-md-5 mb-4 d-flex">
+      <div class="image-container w-100">
         <img
           src="<%= @artwork.image_url.presence || cl_image_path(@artwork.photo.key) %>"
           alt="<%= @artwork.title %>"
-          class="img-fluid rounded">
-        </div>
-      </div>
-      <div class="col-md-4">
-        <h1><%= @artwork.title %></h1>
-        <div class="mt-2">
-          <i class="fas fa-paint-brush mr-2"></i>
-          <span><%= @artwork.artist.artist_display_name %></span>
-        </div>
-        <div class="d-flex align-items-center mt-2">
-          <i class="fas fa-calendar-alt mr-2"></i>
-          <span class="mr-2"><%= @artwork.object_date || "Date inconnue" %></span>
-        </div>
-        <div class="mt-4">
-          <p><strong>Dimensions :</strong> <%= @artwork.dimensions || "Non spécifiées" %></p>
-          <p><strong>Prix par jour :</strong> <%= number_with_precision(@artwork.price_by_day, precision: 0) %> €</p>
-          <p><strong>Propriétaire :</strong> <%= @artwork.owner.first_name %> <%= @artwork.owner.last_name %></p>
-          <%# <p><strong>Commentaire :</strong><%= @artwork.comments.last.content || "Aucun commentaire disponible" %></p>
+          class="img-fluid rounded shadow-lg">
       </div>
     </div>
-    <div class="col">
-      <% unless @artwork.owner == current_user %>
-        <h2>Réservez cette œuvre</h2>
-        <%= simple_form_for [@artwork, @booking] do |f| %>
-          <div class="row">
-            <div class="col-12">
-              <%= f.input :begin_date, as: :string, label: "Date de début", input_html: { type: 'date', id: 'begin_date' } %>
+
+    <div class="col-md-6 d-flex">
+      <div class="w-100 d-flex flex-column" style="min-height: 100%">
+        <div class="card shadow-sm p-3 mb-3 flex-grow-1">
+          <div class="card-body d-flex flex-column justify-content-between p-3">
+            <h2 class="h4 mb-2"><%= @artwork.title %></h2>
+            <div class="d-flex align-items-center mb-1">
+              <i class="fas fa-paint-brush mr-2"></i>
+              <span class="h6 font-weight-light"><%= @artwork.artist.artist_display_name %></span>
             </div>
-            <div class="col-12">
-              <%= f.input :end_date, as: :string, label: "Date de fin", input_html: { type: 'date', id: 'end_date' } %>
+            <div class="d-flex align-items-center mb-1">
+              <i class="fas fa-calendar-alt mr-2"></i>
+              <span class="h6 font-weight-light"><%= @artwork.object_date || "Date inconnue" %></span>
+
+            </div>
+            <div class="mb-2">
+              <p class="mb-1"><strong>Dimensions :</strong> <%= @artwork.dimensions || "Non spécifiées" %></p>
+              <p class="mb-1"><strong>Prix par jour :</strong> <%= number_with_precision(@artwork.price_by_day, precision: 0) %> €</p>
             </div>
           </div>
-          <div class="text-center mt-4">
-            <%= button_tag "Réserver", type: 'submit', class: "button border-button radius-10-0" %>
+
+        </div>
+
+        <% unless @artwork.owner == current_user %>
+          <div class="card shadow-sm p-3 mb-3 flex-grow-1">
+            <div class="card-body d-flex flex-column justify-content-between p-3">
+              <h3 class="h5 text-center mb-2">Réservez cette œuvre</h3>
+              <%= simple_form_for [@artwork, @booking] do |f| %>
+                <div class="form-row">
+                  <div class="col-md-6 mb-2">
+                    <%= f.input :begin_date, as: :string, label: "Date de début", input_html: { type: 'date', class: 'form-control p-1' } %>
+                  </div>
+                  <div class="col-md-6 mb-2">
+                    <%= f.input :end_date, as: :string, label: "Date de fin", input_html: { type: 'date', class: 'form-control p-1' } %>
+                  </div>
+                </div>
+                <div class="text-center mt-3">
+                      <%= button_tag "Réserver", type: 'submit', class: "button border-button radius-10-0" %>
+                </div>
+              <% end %>
+            </div>
+
           </div>
         <% end %>
-      <% end %>
+      </div>
     </div>
+
   </section>
-  <h3 class="text-center mt-5 mb-3">Œuvres du même artiste</h3>
+
+
+  <h2 class="text-center mt-5 mb-4">Œuvres du même artiste</h2>
+
   <div class="row g-4">
     <% if @artwork.similar_artworks.any? %>
       <% @artwork.similar_artworks.each do |similar_artwork| %>
-        <div class="col-md-3 col-sm-6 text-center">
+        <div class="col-md-3 col-sm-6">
           <a href="<%= artwork_path(similar_artwork) %>" class="text-decoration-none text-dark">
-            <div class="card border-0 shadow-sm h-100 scalable">
+
+            <div class="card shadow-lg border-0">
+
               <img src="<%= similar_artwork.image_url.presence || cl_image_path(similar_artwork.photo.key) %>"
                   alt="<%= similar_artwork.title %>"
                   class="card-img-top img-fluid rounded">
-              <div class="card-body d-flex justify-content-center align-items-center p-3">
-                <h6 class="card-title text-truncate mb-0 text-center" title="<%= similar_artwork.title %>">
+              <div class="card-body">
+                <h6 class="card-title text-center text-truncate mb-0" title="<%= similar_artwork.title %>">
                   <%= similar_artwork.title %>
                 </h6>
               </div>
@@ -64,8 +83,8 @@
         </div>
       <% end %>
     <% else %>
-      <div class="col-12">
-        <p class="text-center">Aucune œuvre similaire trouvée.</p>
+      <div class="col-12 text-center">
+        <p>Aucune œuvre similaire trouvée.</p>
       </div>
     <% end %>
   </div>
