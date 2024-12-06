@@ -159,3 +159,10 @@ body {
   font-size: 12px !important;
   letter-spacing: 1.5 !important;
 }
+
+.scalable {
+  transition: 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
