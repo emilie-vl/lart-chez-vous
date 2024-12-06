@@ -23,6 +23,24 @@ class ArtworksController < ApplicationController
     end
   
     @artworks = @artworks.page(params[:page])
+  
+    respond_to do |format|
+      format.html
+      format.json { 
+  render json: @artworks.map { |artwork| 
+    { 
+      title: artwork.title,
+      photo_url: helpers.cl_image_path(artwork.photo.key, height: 200, width: 200, crop: :fill),
+      artist_name: artwork.artist.artist_display_name,
+      dimensions: artwork.dimensions,
+      price: artwork.price_by_day,
+      path: artwork_path(artwork),
+      can_delete: current_user&.id == artwork.owner_id,
+      delete_path: destroy_artwork_path(artwork)
+    }
+  }
+}
+    end
   end
   
   def show

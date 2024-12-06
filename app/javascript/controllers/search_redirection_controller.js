@@ -7,7 +7,11 @@ export default class extends Controller {
   connect() {}
 
   redirect(event) {
-    if (this.userValue && window.location.pathname !== "/artworks") {
+    if (
+      this.userValue &&
+      window.location.pathname !== "/artworks" &&
+      event.target.value.length > 0
+    ) {
       const searchParams = new URLSearchParams();
       searchParams.append("search", event.target.value);
       window.location.href = `/artworks?${searchParams.toString()}`;
