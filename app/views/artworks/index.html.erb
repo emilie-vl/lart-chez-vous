@@ -1,11 +1,14 @@
 <div class="container-fluid mt-4 px-5">
   <div class="d-flex justify-content-between gap-4">
-    <div class="cards col-8" >
-      <% @artworks.each do |artwork| %>
-        <%= link_to artwork_path(artwork) do %>
-          <%=render partial: "application/card", locals: {artwork: artwork}%>
+    <div class="col-8">
+      <div class="cards" >
+        <% @artworks.each do |artwork| %>
+          <%= link_to artwork_path(artwork) do %>
+            <%=render partial: "application/card", locals: {artwork: artwork}%>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+      <%= paginate @artworks, theme: 'bootstrap-5', pagination_class: "pagination-sm flex-wrap justify-content-center text-body" %>
     </div>
     <div class="home-map col-4 sticky-top" style="width: 100%; height: 100vh;"
   data-controller="home-map"

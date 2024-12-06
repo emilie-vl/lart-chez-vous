@@ -2,7 +2,7 @@ class ArtworksController < ApplicationController
   skip_before_action :authenticate_user!, only: :show
 
   def index
-    @artworks = Artwork.all
+    @artworks = Artwork.page(params[:page])
     @users = User.near("#{current_user.address}",100)
     @artwork_count = 0
     @users.each do |user|
