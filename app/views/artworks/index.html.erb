@@ -1,9 +1,19 @@
 <div class="container-fluid px-5">
-  <div class="cards">
+<div class="row">
+  <div class="cards col-8 pr-5" >
     <% @artworks.each do |artwork| %>
       <%= link_to artwork_path(artwork) do %>
         <%=render partial: "application/card", locals: {artwork: artwork}%>
       <% end %>
     <% end %>
   </div>
+
+<div class="home-map mb-5 col-4 sticky-top" style="width: 100%; height: 800px;"
+  data-controller="home-map"
+  data-home-map-markers-value="<%= @markers.to_json %>"
+  data-home-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  <div class="index-map-title leckerli"><%= @artwork_count %> oeuvres près de chez vous</div>
 </div>
+</div>
+
+  </div>

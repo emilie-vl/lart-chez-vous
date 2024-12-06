@@ -31,8 +31,9 @@ body {
 }
 
 .cards {
+
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 30px;
   a {
     text-decoration: none;
@@ -45,7 +46,7 @@ body {
 .cards .card {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 0;
-  height: 310px;
+  height: 350px;
   width: 100%;
   margin-bottom: 20px;
   transition: 0.3s ease;
