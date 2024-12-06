@@ -48,7 +48,6 @@ class ArtworksController < ApplicationController
     @artwork = Artwork.find(params[:id])
     @booking = Booking.new
     @marker = { lng: @artwork.owner.longitude, lat: @artwork.owner.latitude }
-
   end
 
   def new
