@@ -4,33 +4,54 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["myRentals", "myArtworks", "tabsUl", "myBookings"];
 
-  connect() {}
+  connect() {
+    const hash = window.location.hash;
+    console.log("Stimulus connected. Current hash:", hash);
 
-  showArtworks(event) {
-    event.preventDefault();
+    if (hash === "#myArtworks") {
+      this.showArtworks();
+    } else if (hash === "#myBookings") {
+      this.showBookings();
+    } else {
+      this.showRentals();
+    }
+
+    window.history.replaceState(null, null, hash || "#myRentals");
+  }
+
+  showArtworks(event = null) {
+    if (event) event.preventDefault();
     this.removeActiveClass();
-    event.target.classList.add("active");
+    if (event) event.target.classList.add("active");
     this.myArtworksTarget.classList.remove("d-none");
     this.myRentalsTarget.classList.add("d-none");
     this.myBookingsTarget.classList.add("d-none");
+
+    if (window.location.hash !== "#myArtworks") {
+      window.history.replaceState(null, null, "#myArtworks");
+    }
   }
 
-  showRentals(event) {
-    event.preventDefault();
+  showRentals(event = null) {
+    if (event) event.preventDefault();
     this.removeActiveClass();
-    event.target.classList.add("active");
+    if (event) event.target.classList.add("active");
     this.myArtworksTarget.classList.add("d-none");
     this.myRentalsTarget.classList.remove("d-none");
     this.myBookingsTarget.classList.add("d-none");
+
+    window.history.replaceState(null, null, "#myRentals");
   }
 
-  showBookings(event) {
-    event.preventDefault();
+  showBookings(event = null) {
+    if (event) event.preventDefault();
     this.removeActiveClass();
-    event.target.classList.add("active");
+    if (event) event.target.classList.add("active");
     this.myArtworksTarget.classList.add("d-none");
     this.myRentalsTarget.classList.add("d-none");
     this.myBookingsTarget.classList.remove("d-none");
+
+    window.history.replaceState(null, null, "#myBookings");
   }
 
   removeActiveClass() {

@@ -21,10 +21,20 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html);
+      const popup = new mapboxgl.Popup({
+        maxWidth: "400px",
+        closeButton: true,
+      });
+
       new mapboxgl.Marker()
         .setLngLat([marker.lng, marker.lat])
-        .setPopup(popup)
+        .setPopup(
+          popup.on("open", () => {
+            fetch(`/users/${marker.user_id}/info_window`)
+              .then((response) => response.text())
+              .then((html) => popup.setHTML(html));
+          })
+        )
         .addTo(this.map);
     });
   }
