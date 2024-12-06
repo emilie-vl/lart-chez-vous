@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :artworks, only: [:index, :show, :new, :destroy, :create] do
     collection do
       get '/my-artworks', to: "artworks#owner_index", as: :owner
+      get '/super-admin', to: "artworks#super_admin_index", as: :super_admin
     end
     resources :bookings, only: [:new, :create]
   end
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: "dashboard#index"
   get 'dashboard/artworks/:id', to: 'dashboard#destroy_artwork', as: 'destroy_artwork'
+  get '/users/:id/info_window', to: "users#info_window"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

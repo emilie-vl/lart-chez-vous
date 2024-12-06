@@ -29,6 +29,16 @@ class ArtworksController < ApplicationController
     end
   end
 
+  def super_admin_index
+    @artworks = Artwork.all
+  end
+
+  def destroy
+    @artwork = Artwork.find(params[:id])
+    @artwork.destroy
+    redirect_to super_admin_artworks_path, status: :see_other
+  end
+
   private
 
   def artwork_params

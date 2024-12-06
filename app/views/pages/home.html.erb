@@ -8,7 +8,7 @@
             <h2 class="leckerli">Faites venir des œuvres d'art sur vos murs !</h2>
             <p>L'art chez vous, c'est la plus grande offre d'œuvres d'art en location au monde. À cette date, <%= @artwork_count %> œuvres disponibles !</p>
             <div class="d-flex justify-content-between">
-              <% if current_user %>
+              <% if user_signed_in? %>
                 <%= link_to "Mon compte", dashboard_path, class:"button button-lg radius-10-0" %>
                 <%= link_to "Voir toutes les œuvres", artworks_path, class:"button border-button button-lg radius-10-0" %>
               <% else %>
