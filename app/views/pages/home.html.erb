@@ -24,7 +24,13 @@
               <div class="carousel-inner">
                 <% @artworks.each do |artwork| %>
                   <div class="carousel-item <%= "active" if @artworks.first == artwork %>">
-                    <%= cl_image_tag artwork.photo.key, height: 400, width: 400, crop: "fill", class: "d-block w-100", alt: "#{artwork.title}" %>
+                    <% if user_signed_in? %>
+                      <%= link_to artwork_path(artwork) do %>
+                        <%= cl_image_tag artwork.photo.key, height: 400, width: 400, crop: "fill", class: "d-block w-100", alt: "#{artwork.title}" %>
+                      <% end %>
+                    <% else %>
+                      <%= cl_image_tag artwork.photo.key, height: 400, width: 400, crop: "fill", class: "d-block w-100", alt: "#{artwork.title}" %>
+                    <% end %>
                   </div>
                 <% end %>
               </div>
