@@ -351,17 +351,13 @@ p {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background: #2f80ed;
-  color: #ffffff;
+  background: #333333; // Couleur de fond noir
+  color: #ffffff; // Couleur du texte blanc
   border: 1px solid transparent;
   position: relative;
   z-index: 1;
   padding: 0 25px;
   overflow: hidden;
-}
-
-.button i {
-  padding-left: 20px;
 }
 
 .button::before {
@@ -374,7 +370,7 @@ p {
   padding: 50%;
   border-radius: 50%;
   margin: auto;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1); // Effet au survol en noir
   z-index: -1;
   transition: all 0.4s linear;
   transform: translate3d(-50%, -50%, 0) scale(0);
@@ -390,12 +386,12 @@ p {
 
 .button.border-button {
   background: transparent;
-  color: #2f80ed;
-  border-color: #2f80ed;
+  color: #333333; // Couleur du texte noir
+  border-color: #333333; // Couleur de la bordure noire
 }
 
 .button.border-button::before {
-  background: rgba(47, 128, 237, 0.16);
+  background: rgba(51, 51, 51, 0.16); // Effet au survol en noir
 }
 
 .button-lg {
