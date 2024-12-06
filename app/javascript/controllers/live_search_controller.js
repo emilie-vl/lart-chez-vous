@@ -3,21 +3,24 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["input", "list"];
 
-  connect() {
-    console.log(this.listTarget);
-  }
-
   search() {
-    const url = `${window.location.pathname}?${new URLSearchParams({
-      search: this.inputTarget.value,
-      format: "json",
-    })}`;
+    const searchValue = this.inputTarget.value;
 
-    fetch(url, {
-      headers: {
-        Accept: "application/json",
-      },
-    })
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set("search", searchValue);
+    const queryString = searchParams.toString();
+
+    const newUrl = `${window.location.pathname}${
+      queryString ? "?" + queryString : ""
+    }`;
+    history.pushState({ path: newUrl }, "", newUrl);
+
+    fetch(
+      `${window.location.pathname}?${new URLSearchParams({
+        search: searchValue,
+        format: "json",
+      })}`
+    )
       .then((response) => response.json())
       .then((artworks) => {
         this.listTarget.innerHTML = this.buildCards(artworks);
