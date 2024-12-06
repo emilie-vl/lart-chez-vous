@@ -1,6 +1,5 @@
 <div class="container mt-4">
   <h2>Se connecter</h2>
-
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-inputs">
       <div class="form-group">
@@ -9,25 +8,20 @@
                     autofocus: true,
                     input_html: { autocomplete: "email" } %>
       </div>
-
       <div class="form-group">
         <%= f.input :password,
                     required: false,
                     input_html: { autocomplete: "current-password" } %>
       </div>
-
       <div class="form-group">
         <%= f.input :remember_me, as: :boolean, label: "Se souvenir de moi" if devise_mapping.rememberable? %>
       </div>
     </div>
-
     <div class="form-actions">
-      <%= f.button :submit, "Se connecter", class: "btn-submit btn-outline-secondary" %>
+      <%= button_tag "Se connecter", class: "button border-button radius-10-0", type: 'submit' %>
     </div>
   <% end %>
-
   <div class="form-links">
     <%= render "devise/shared/links" %>
   </div>
-
 </div>
