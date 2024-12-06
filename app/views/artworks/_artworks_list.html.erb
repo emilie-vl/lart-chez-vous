@@ -1,0 +1,8 @@
+<div class="cards col-8" id="artworks-list" data-live-search-target="list">
+  <% artworks.each do |artwork| %>
+    <%= link_to artwork_path(artwork) do %>
+      <%= render partial: "application/card", locals: {artwork: artwork} %>
+    <% end %>
+  <% end %>
+  <%= paginate artworks, theme: 'bootstrap-5', pagination_class: "pagination-sm flex-wrap justify-content-center text-body" %>
+</div>
