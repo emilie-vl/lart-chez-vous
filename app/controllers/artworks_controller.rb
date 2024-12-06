@@ -3,6 +3,18 @@ class ArtworksController < ApplicationController
 
   def index
     @artworks = Artwork.all
+    @users = User.near("#{current_user.address}",100)
+    @artwork_count = 0
+    @users.each do |user|
+      @artwork_count += user.owned_artworks.count
+    end
+    @markers = @users.geocoded.map do |user|
+      {
+        lat: user.latitude,
+        lng: user.longitude,
+        user_id: user.id
+      }
+    end
     if params[:search].present?
       @artworks = Artwork.search_by_title_and_artist_display_name(params[:search])
     end
@@ -27,16 +39,6 @@ class ArtworksController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def super_admin_index
-    @artworks = Artwork.all
-  end
-
-  def destroy
-    @artwork = Artwork.find(params[:id])
-    @artwork.destroy
-    redirect_to super_admin_artworks_path, status: :see_other
   end
 
   private

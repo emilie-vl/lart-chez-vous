@@ -23,14 +23,13 @@
         <%= image_tag "icone-magritte.png", width: "90px" %>
       </div>
     <% end %>
-    <div id="connect">
-      <% if user_signed_in? %>
-        <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-secondary" %>
-      <% else %>
-        <%= link_to new_user_session_path, class: "btn btn-outline-secondary" do %>
-          <i class="fas fa-user"></i> Se connecter / S'inscrire
+    <% if user_signed_in? %>
+      <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "button border-button radius-10-0" %>
+    <% else %>
+      <%= link_to new_user_session_path, class: "button border-button radius-10-0 d-flex justify-content-center gap-2" do %>
+        <i class="fas fa-user"></i>
+        <span>Se connecter<span>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
-  </div>
-</div>

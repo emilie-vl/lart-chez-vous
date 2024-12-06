@@ -1,10 +1,32 @@
-<div class="container">
-  <h1>Détails de la réservation</h1>
-
-  <p><strong>Oeuvre :</strong> <%= @booking.artwork.title %></p>
-  <p><strong>Du :</strong> <%= @booking.begin_date %></p>
-  <p><strong>Au :</strong> <%= @booking.end_date %></p>
-  <p><strong>Prix total :</strong> <%= @booking.price %> €</p>
-
-  <%= link_to "Retour à l'œuvre", artwork_path(@booking.artwork), class: "btn btn-secondary" %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="image-container mb-4">
+        <img src="<%= @booking.artwork.image_url.presence || cl_image_path(@booking.artwork.photo.key) %>"
+             alt="<%= @booking.artwork.title %>"
+             class="img-fluid rounded shadow-sm">
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card border-0">
+        <div class="card-body">
+          <h2 class="card-title mb-4"><i class="fas fa-calendar-check mr-2"></i>Détails de la réservation</h2>
+          <p><i class="fas fa-paint-brush mr-2"></i><strong>Oeuvre :</strong> <%= @booking.artwork.title %> de <%= @booking.artwork.artist.artist_display_name %></p>
+          <p><i class="fas fa-calendar-day mr-2"></i><strong>Du :</strong> <%= I18n.l(@booking.begin_date, format: "%d %B %Y") %></p>
+          <p><i class="fas fa-calendar-day mr-2"></i><strong>Au :</strong> <%= I18n.l(@booking.end_date, format: "%d %B %Y") %></p>
+          <p><i class="fas fa-euro-sign mr-2"></i><strong>Prix total :</strong> <%= @booking.price %> €</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5">
+    <div class="alert alert-success text-center">
+      <i class="fas fa-info-circle mr-2"></i>
+      <strong>Merci pour votre réservation !</strong><br>
+      Il ne manque plus que la validation du propriétaire pour que vos murs soient ornés de cette magnifique oeuvre.
+    </div>
+  </div>
+  <div class="mt-4 text-center">
+    <%= link_to "Retour", dashboard_path, class: "button border-button button-sm radius-10-0 mx-auto" %>
+  </div>
 </div>

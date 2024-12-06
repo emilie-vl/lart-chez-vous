@@ -1,3 +1,4 @@
+
 <div class="container mt-5">
   <section class="row justify-content-center">
 
@@ -22,12 +23,14 @@
             <div class="d-flex align-items-center mb-1">
               <i class="fas fa-calendar-alt mr-2"></i>
               <span class="h6 font-weight-light"><%= @artwork.object_date || "Date inconnue" %></span>
+
             </div>
             <div class="mb-2">
               <p class="mb-1"><strong>Dimensions :</strong> <%= @artwork.dimensions || "Non spécifiées" %></p>
               <p class="mb-1"><strong>Prix par jour :</strong> <%= number_with_precision(@artwork.price_by_day, precision: 0) %> €</p>
             </div>
           </div>
+
         </div>
 
         <% unless @artwork.owner == current_user %>
@@ -44,10 +47,11 @@
                   </div>
                 </div>
                 <div class="text-center mt-3">
-                  <%= f.button :submit, "Réserver", class: "btn btn-primary btn-lg px-4" %>
+                      <%= button_tag "Réserver", type: 'submit', class: "button border-button radius-10-0" %>
                 </div>
               <% end %>
             </div>
+
           </div>
         <% end %>
       </div>
@@ -55,13 +59,17 @@
 
   </section>
 
+
   <h2 class="text-center mt-5 mb-4">Œuvres du même artiste</h2>
+
   <div class="row g-4">
     <% if @artwork.similar_artworks.any? %>
       <% @artwork.similar_artworks.each do |similar_artwork| %>
         <div class="col-md-3 col-sm-6">
           <a href="<%= artwork_path(similar_artwork) %>" class="text-decoration-none text-dark">
+
             <div class="card shadow-lg border-0">
+
               <img src="<%= similar_artwork.image_url.presence || cl_image_path(similar_artwork.photo.key) %>"
                   alt="<%= similar_artwork.title %>"
                   class="card-img-top img-fluid rounded">

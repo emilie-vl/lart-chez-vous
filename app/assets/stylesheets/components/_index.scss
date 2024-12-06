@@ -6,3 +6,19 @@
 @import "tabs";
 @import "table";
 @import "map";
+
+
+.home-map {
+  position: relative;
+
+  .index-map-title {
+    position: absolute;
+    top: 20px;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.742);
+    font-size: 1.5rem;
+    left: 20px;
+    padding: 10px;
+    border-radius: 15px;
+  }
+}

@@ -22,6 +22,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  font-family: "Lato", sans-serif !important;
 }
 
 .body-content {
@@ -30,8 +31,9 @@ body {
 }
 
 .cards {
+
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 30px;
   a {
     text-decoration: none;
@@ -53,7 +55,7 @@ body {
 .cards .card {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 0;
-  height: 310px;
+  height: 350px;
   width: 100%;
   margin-bottom: 20px;
   transition: 0.3s ease;
@@ -106,14 +108,14 @@ body {
 .flash-notice {
   background-color: #28a745;
   color: white;
-  margin: 0 15px 15px 15px;
+  margin: 15px;
   padding: 10px;
   border-radius: 5px;
 }
 .flash-alert {
   background-color: #dc3545;
   color: white;
-  margin: 0 15px 15px 15px;
+  margin: 15px;
   padding: 10px;
   border-radius: 5px;
 }
@@ -152,4 +154,16 @@ body {
 .delete-link:hover i {
   color: darkred;
   transform: scale(1.2);
+}
+
+.badge {
+  font-size: 12px !important;
+  letter-spacing: 1.5 !important;
+}
+
+.scalable {
+  transition: 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
 }
