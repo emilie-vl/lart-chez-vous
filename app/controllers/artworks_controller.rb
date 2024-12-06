@@ -24,6 +24,8 @@ class ArtworksController < ApplicationController
     store_location_for(:user, request.fullpath)
     @artwork = Artwork.find(params[:id])
     @booking = Booking.new
+    @marker = { lng: @artwork.owner.longitude, lat: @artwork.owner.latitude }
+
   end
 
   def new
