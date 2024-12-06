@@ -7,10 +7,10 @@
     </div>
     <div>
       <div id="search">
-        <%= simple_form_for :search, url: artworks_path, method: :get do |f| %>
+        <%= simple_form_for :search, url: artworks_path, method: :get, data: { action: "input->search-redirection#redirect", controller: "search-redirection search-focus", search_redirection_user_value: user_signed_in? } do |f| %>
           <div class="input-group mb-3">
             <button class="btn btn-outline-secondary" type="submit" id="button-addon1"><i class="fas fa-search"></i></button>
-            <input type="text" class="form-control" placeholder="Rechercher une œuvre" aria-label="Example text with button addon" aria-describedby="button-addon1" name="search">
+            <input type="text" class="form-control" placeholder="Rechercher une œuvre" aria-label="Example text with button addon" aria-describedby="button-addon1" name="search" data-search-focus-target="input">
           </div>
         <% end %>
       </div>

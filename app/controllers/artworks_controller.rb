@@ -2,12 +2,12 @@ class ArtworksController < ApplicationController
   skip_before_action :authenticate_user!, only: :show
 
   def index
-    @artworks = Artwork.page(params[:page])
-    @users = User.near("#{current_user.address}",100)
+    @users = User.near("#{current_user.address}", 100)
     @artwork_count = 0
     @users.each do |user|
       @artwork_count += user.owned_artworks.count
     end
+    
     @markers = @users.geocoded.map do |user|
       {
         lat: user.latitude,
@@ -15,11 +15,16 @@ class ArtworksController < ApplicationController
         user_id: user.id
       }
     end
-    if params[:search].present?
-      @artworks = Artwork.search_by_title_and_artist_display_name(params[:search])
+  
+    @artworks = if params[:search].present?
+      Artwork.search_by_title_and_artist_display_name(params[:search])
+    else
+      Artwork.all
     end
-
+  
+    @artworks = @artworks.page(params[:page])
   end
+  
   def show
     store_location_for(:user, request.fullpath)
     @artwork = Artwork.find(params[:id])
